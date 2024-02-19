@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "commonjs",
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "outDir": "./dist",
+      "strict": true,
+      "esModuleInterop": true, 
+      "skipLibCheck": true, 
+      "typeRoots": ["node_modules/@types", "src/types"],
+      "noImplicitAny": false,
+      // "lib": ["ESNext"] // Add this line
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist"
+    ],
+  }
+  
