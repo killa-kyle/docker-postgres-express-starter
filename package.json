@@ -11,19 +11,20 @@
     "start": "node dist/index.js",
     "dev": "nodemon -e ts --exec 'npm run build+run'",
     "dev-with-docker": "nodemon -e ts --exec 'npm run debug-with-docker'"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "dotenv": "^16.4.4",
+    "dotenv-extended": "^2.9.0",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+
     "express": "^4.18.2",
+    "helmet": "^7.1.0",
     "knex": "^3.1.0",
     "pg": "^8.11.3"
   }
