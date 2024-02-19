@@ -5,8 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "build+run": "tsc && node dist/index.js",
+    "debug": "node --inspect --require=ts-node/register src/index.ts",
+    "debug-with-docker": "node --inspect=0.0.0.0 --require=ts-node/register src/index.ts",
     "start": "node dist/index.js",
-    "start:dev": "nodemon --inspect=0.0.0.0:9229 dist/index.js --delay 1"
+    "dev": "nodemon -e ts --exec 'npm run build+run'",
+    "dev-with-docker": "nodemon -e ts --exec 'npm run debug-with-docker'"
+
   },
   "keywords": [],
   "author": "",
@@ -14,6 +19,12 @@
   "devDependencies": {
     "dotenv": "^16.4.4",
     "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "knex": "^3.1.0",
+    "pg": "^8.11.3"
   }
 }

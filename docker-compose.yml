@@ -1,0 +1,26 @@
+version: "3"
+services:
+  app:
+    build: .
+    command: ${COMMAND:-echo "no command specified"}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      PORT: ${PORT}
+    ports:
+      - ${PORT}:4000
+      - 9229:9229
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: demoUser
+      POSTGRES_PASSWORD: demoPassword
+      POSTGRES_DB: demoDB

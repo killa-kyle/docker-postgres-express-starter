@@ -10,10 +10,9 @@ WORKDIR /usr/src/app
 
 
 
-COPY package.json .
+COPY package*.json ./
 
-RUN npm install\
-    && npm install typescript -g
+RUN npm install
 
 COPY . .
 
@@ -22,6 +21,6 @@ RUN npm run build
 EXPOSE ${PORT}
 
 
-# Start the bot.
+# Start the server.
 
 CMD ["node", "./dist/index.js"]
