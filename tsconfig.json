@@ -14,7 +14,8 @@
       // "lib": ["ESNext"] // Add this line
     },
     "include": [
-      "src/**/*.ts"
+      // "src/**/*.ts"
+      "**/*.ts",
     ],
     "exclude": [
       "node_modules",

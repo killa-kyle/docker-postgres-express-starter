@@ -19,8 +19,18 @@ export const getPost = (id: number): Promise<Post> => {
     return knexClient(POSTS_TABLE).select('*').where('id', id).first()
 }
 
-export const getPosts = (): Promise<Post[]> => {
-    return knexClient(POSTS_TABLE).select('*')
+export const getPosts = async (skip?: number, limit?: number) => {
+    if (!limit) limit = 10
+    if (limit > 100) limit = 100
+    if (!skip) skip = 0
+    const total = await knexClient(POSTS_TABLE).count()
+    const posts = await knexClient(POSTS_TABLE).select('*').offset(skip).limit(limit)
+    return {
+        total: total[0]?.count,
+        skip,
+        limit,
+        posts
+    }
 }
 
 export const createPost = (title: string, content: string) => {
