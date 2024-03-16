@@ -28,7 +28,11 @@ export const createPost = (title: string, content: string) => {
 }
 
 export const deletePost = (id: number) => {
-    return knexClient(POSTS_TABLE).delete().where('id', id).returning('*')
+return knexClient.transaction(async (trx): Promise<Post> => {
+        const post = await trx(POSTS_TABLE).select('*').where('id', id).first();
+        await trx(POSTS_TABLE).delete().where('id', id);
+        return post;
+    });
 }
 
 export const updatePost = (id: number, title: string, content: string) => {
