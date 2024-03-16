@@ -10,7 +10,9 @@
     "debug-with-docker": "node --inspect=0.0.0.0 --require=ts-node/register src/index.ts",
     "start": "node dist/index.js",
     "dev": "nodemon -e ts --exec 'npm run build+run'",
-    "dev-with-docker": "nodemon -e ts --exec 'npm run debug-with-docker'"
+    "dev-with-docker": "nodemon -e ts --exec 'npm run debug-with-docker'",
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run"
   },
   "keywords": [],
   "author": "",

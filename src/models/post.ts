@@ -1,5 +1,11 @@
 import knexClient from '../lib/db'
 
+export interface Post {
+    id: number
+    title: string
+    content: string
+}
+
 const POSTS_TABLE = 'posts'
 export const createPostsTable = () => {
     return knexClient.schema.createTable(POSTS_TABLE, (table) => {
@@ -9,11 +15,11 @@ export const createPostsTable = () => {
     })
 }
 
-export const getPost = (id: number) => {
+export const getPost = (id: number): Promise<Post> => {
     return knexClient(POSTS_TABLE).select('*').where('id', id).first()
 }
 
-export const getPosts = () => {
+export const getPosts = (): Promise<Post[]> => {
     return knexClient(POSTS_TABLE).select('*')
 }
 
