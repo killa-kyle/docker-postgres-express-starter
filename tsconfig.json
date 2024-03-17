@@ -3,7 +3,7 @@
       "target": "es6",
       "module": "commonjs",
       "preserveConstEnums": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "outDir": "./dist",
       "rootDir": "./",
       "strict": true,
