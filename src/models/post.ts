@@ -1,4 +1,4 @@
-import knexClient from '../lib/db'
+import {knex} from '../lib/db'
 
 export interface Post {
     id: number
@@ -8,7 +8,7 @@ export interface Post {
 
 const POSTS_TABLE = 'posts'
 export const createPostsTable = () => {
-    return knexClient.schema.createTable(POSTS_TABLE, (table) => {
+    return knex.schema.createTable(POSTS_TABLE, (table) => {
         table.increments('id')
         table.string('title')
         table.string('content')
@@ -16,15 +16,15 @@ export const createPostsTable = () => {
 }
 
 export const getPost = (id: number): Promise<Post> => {
-    return knexClient(POSTS_TABLE).select('*').where('id', id).first()
+    return knex(POSTS_TABLE).select('*').where({id}).first()
 }
 
 export const getPosts = async (skip?: number, limit?: number) => {
     if (!limit) limit = 10
     if (limit > 100) limit = 100
     if (!skip) skip = 0
-    const total = await knexClient(POSTS_TABLE).count()
-    const posts = await knexClient(POSTS_TABLE).select('*').offset(skip).limit(limit)
+    const total = await knex(POSTS_TABLE).count()
+    const posts = await knex(POSTS_TABLE).select('*').offset(skip).limit(limit)
     return {
         total: total[0]?.count,
         skip,
@@ -34,11 +34,11 @@ export const getPosts = async (skip?: number, limit?: number) => {
 }
 
 export const createPost = (title: string, content: string) => {
-    return knexClient(POSTS_TABLE).insert({title, content}).returning('*')
+    return knex(POSTS_TABLE).insert({title, content}).returning('*')
 }
 
 export const deletePost = (id: number) => {
-return knexClient.transaction(async (trx): Promise<Post> => {
+return knex.transaction(async (trx): Promise<Post> => {
         const post = await trx(POSTS_TABLE).select('*').where('id', id).first();
         await trx(POSTS_TABLE).delete().where('id', id);
         return post;
@@ -46,5 +46,5 @@ return knexClient.transaction(async (trx): Promise<Post> => {
 }
 
 export const updatePost = (id: number, title: string, content: string) => {
-    return knexClient(POSTS_TABLE).update({title, content}).where('id', id).returning('*')
+    return knex(POSTS_TABLE).update({title, content}).where('id', id).returning('*')
 }

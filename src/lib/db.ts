@@ -1,6 +1,9 @@
-import knex from "knex";
+import Knex from "knex";
 import config from "../../knexfile";
-const knexClient = knex(config);
 
+export const knex = Knex(config);
+
+export const closeAll = async () => {
+    await knex.destroy()
+}
 console.log('Database connected!', process.env.NODE_ENV)
-export default knexClient
