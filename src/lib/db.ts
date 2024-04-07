@@ -6,4 +6,4 @@ export const knex = Knex(config);
 export const closeAll = async () => {
     await knex.destroy()
 }
-console.log('Database connected!', process.env.NODE_ENV)
+// console.log('Database connected!', process.env.NODE_ENV)

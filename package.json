@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "build:client": "cd src/frontend && npx vite build && mv dist ../../dist/frontend",
     "build+run": "tsc && node dist/src/index.js",
     "debug": "node --inspect --require=ts-node/register src/index.ts",
     "debug-with-docker": "node --inspect=0.0.0.0 --require=ts-node/register src/index.ts",
@@ -26,6 +27,7 @@
     "jest": "^29.7.0",
     "jest-mock-extended": "^3.0.5",
     "nodemon": "^3.0.3",
+    "prettier": "3.2.5",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",

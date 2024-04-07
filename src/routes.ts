@@ -1,3 +1,5 @@
+import express from "express";
+import path from "path";
 import {
   createPostController,
   deletePostController,
@@ -9,6 +11,7 @@ import {
 export default (app): void => {
   statusRoutes(app);
   postRoutes(app);
+  staticRoutes(app);
 };
 
 const postRoutes = (app) => {
@@ -31,3 +34,11 @@ const statusRoutes = (app) => {
     });
   });
 };
+
+// static routes for frontend
+const staticRoutes = (app) => {
+  app.use(express.static(path.join(__dirname, "../frontend")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  });
+}

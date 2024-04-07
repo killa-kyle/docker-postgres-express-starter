@@ -1,4 +1,5 @@
 import * as Knex from "../../src/lib/db";
+// const knex = jest.createMockFromModule("knex");
 export const mockKnex = (customMocks = {}) => {
     jest.mock("../../src/lib/db");
   
