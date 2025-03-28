@@ -11,23 +11,24 @@ const EditPostForm = ({post}: {post: Post}) => {
     const [content, setContent] = useState(post.content)
     const {editPost} = useEditPost()
     const navigate = useNavigate()
+    const postId = post.id
     const editPostMutation = useMutation({
         mutationFn: editPost,
         onSuccess: () => {
           // Invalidate and refetch
           queryClient.invalidateQueries({ queryKey: ['posts'] })
-          queryClient.invalidateQueries({ queryKey: ['postById-' + post.id] })
+          queryClient.invalidateQueries({ queryKey: ['postById-' + postId] })
         },
       })
 
     return (
         <>
-            <h2 className="font-display text-4xl text-neon-pink font-bold">Edit Post {post.id}</h2>
+            <h2 className="font-display text-4xl text-neon-pink font-bold">Edit Post {postId}</h2>
 
 
             <div className="mx-auto w-full max-w-[550px]">
                 <form onSubmit={(e) => {
-                     e.preventDefault(); editPostMutation.mutate({postId: post.id, title, content }); 
+                     e.preventDefault(); editPostMutation.mutate({ postId, title, content }); 
                      /* redirect to /posts using tanstack router */
                     navigate({ to: '/posts' });
 
